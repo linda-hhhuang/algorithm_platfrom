@@ -1,0 +1,27 @@
+<div *ngIf="!showSuccess" class="text-lg pt-4 pl-4">
+  ​ Program is running epoch {{ receiveMessage.epoch }}/{{
+    receiveMessage.all_epochs
+  }}. The learning rate is {{ receiveMessage.lr }}.
+</div>
+<div
+  *ngIf="showSuccess"
+  class="text-lg pt-4 pl-4 h-full scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-rounded-xl scrollbar-thumb-gray-200 scrollbar-track-gray-50 hover:scrollbar-thumb-gray-300 overflow-y-scroll"
+>
+  Program is finished. Program has run {{ receiveMessage.all_epochs }} epochs. ​
+  <br />
+  The time program has run:{{ receiveMessage.all_time }}.
+  <br />
+  Model's average cost : {{ receiveMessage.avg_cost }}, standard deviation：{{
+    receiveMessage.std_cost
+  }}.
+  <br />
+  <br />
+  ​cost graph: ​
+  <div class="w-5/6 h-96">
+    <div echarts [options]="chartOption1"></div>
+  </div>
+  loss graph:
+  <div class="w-5/6 h-96">
+    <div echarts [options]="chartOption2"></div>
+  </div>
+</div>

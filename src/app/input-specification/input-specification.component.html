@@ -1,0 +1,119 @@
+<div
+  [ngSwitch]="index"
+  class="h-full scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-rounded-xl scrollbar-thumb-gray-200 scrollbar-track-gray-50 hover:scrollbar-thumb-gray-300 overflow-y-scroll"
+>
+  <div *ngSwitchCase="0" class="pt-6 pl-3 pr-3 leading-7">
+    <p class="text-lg">1. 请通过problem选择需要处理的问题。</p>
+    <p>算法库可以处理4个问题，分别是TSP，CVRP，OP，PCTSP。</p>
+    <ul class="list-disc list-inside">
+      <li>
+        TSP：旅行商问题，在欧式平面上给定一些节点，求访问每个节点一次并回到起始点的最短回路。
+      </li>
+      <li>
+        CVRP：带容量的车辆路径问题，在欧氏平面上给定仓库和一些的节点的位置，每个节点都有不同数量的货物需求，需要构造多条起点和终点都在仓库的车辆路径，使得在运送货物数量不超过车辆容量的情况下，路径的总长度最短。
+      </li>
+      <li>
+        OP：定向运动问题，在欧氏平面上给定仓库和一些节点的位置，每个节点有其关联的奖金，当到达某一个节点时会取得这个节点的奖金，需要构造一条起点和终点都在仓库的简单回路，在回路长度小于一个给定值的情况下，使取得的奖金数最大。
+      </li>
+      <li>
+        PCTSP：奖金收集旅行商问题，在欧式平面上给定仓库和一些节点的位置，每个节点有其关联的奖金和惩罚，需要构造一条起点和终点都在仓库的简单回路，在收集的奖金不小于某一个定值时，最小化回路长度加上没有经过的点的惩罚。
+      </li>
+    </ul>
+    <br />
+    <p class="text-lg">2. 请通过graph size输入问题中图的点数。</p>
+    <p>
+      算法库将会保证在训练和验证模型中所用到的每个问题实例中节点数均为graph
+      size。
+    </p>
+  </div>
+  <div *ngSwitchCase="1" class="pt-6 pl-3 pr-3 leading-7">
+    <p class="text-lg">1. 请通过model选择处理问题的模型。</p>
+    算法库实现了2个模型：Attention和Pointer
+    Network。不同的组合优化问题的状态输入至模型后会产生动作，从而改变问题状态，最终得到问题的解。经过足够训练，模型能够处理组合优化问题，找到优秀的解。
+    <ul class="list-disc list-inside">
+      <li>
+        Attention：注意力机制，算法库使用了类似于Transformer的架构，分为编码器和解码器。编码器拥有多层，每层有多头注意力层和前馈网络层。原问题的输入信息通过映射到高维嵌入向量后输入进编码层，编码器对嵌入向量进行了更新。解码器拥有一个多头注意力层，解码器将结合编码器更新过的嵌入向量和之前解码器的输出得到当前解码器的输出，从而获得当前状态下模型选择的动作。
+      </li>
+      <li>
+        Pointer
+        Network：指针网络，算法库使用的指针网络同样拥有编码器和解码器的结构，编码器和解码器是两个单层的LSTM，原问题的输入信息也将映射到高维向量，再与一个隐藏层向量一同输入LSTM，通过编码器和解码器的输出可以获得当前状态下模型选择的动作。
+      </li>
+    </ul>
+    <br />
+    <p class="text-lg">2. 请通过embedding dim输入嵌入向量的维数。</p>
+    算法库会将输入的信息映射到高维的嵌入向量，再给模型处理。嵌入向量的维数为embedding
+    dim。
+    <br />
+    <br />
+    <p class="text-lg">3. 请通过encode layers 输入编码层的层数。</p>
+    注意力机制的编码层是多层的，层数为encode layers
+    <br />
+    <br />
+    <p class="text-lg">
+      4. 请通过heads输入编码层和解码层的多头注意力机制的头数。
+    </p>
+    注意力机制的编码层和解码层都拥有多头注意力层，多头注意力层的头数为heads，注意力机制将输入的嵌入向量切割为heads个规模相同的向量进行操作，从而体现注意力在嵌入向量的不同位置有不同表现。embedding
+    dim应该是heads的整数倍。
+    <br />
+    <br />
+    <p class="text-lg">
+      5. 请通过hidden dim输入编码层和解码层中隐藏向量的维数。
+    </p>
+    指针网络中的编码层和解码层都是单层的LSTM，嵌入向量和隐藏向量都将输入到LSTM中。隐藏向量的维数为hidden
+    dim。
+  </div>
+  <div *ngSwitchCase="2" class="pt-6 pl-3 pr-3 leading-7">
+    <p class="text-lg">1. 请通过algorithm选择强化学习算法。</p>
+    算法库实现了强化学习算法Self Critic。 Self
+    Critic在模型训练的过程中选择表现最优秀的模型作为基准，并通过基准和当前模型可以求出损失函数，通过损失函数就可以更新模型的参数，进行模型的训练。如果当前模型能够通过单边t检验（alpha=0.05）证明它优于最优模型，那么用当前模型更新最优模型。
+    <br />
+    <br />
+    <p class="text-lg">2. 请通过baseline alpha选择t检验参数alpha。</p>
+    在强化学习算法Self Critic中，更新最优模型需要通过参数为alpha的单边t检验。
+  </div>
+  <div *ngSwitchCase="3" class="pt-6 pl-3 pr-3 leading-7">
+    <p class="text-lg">
+      1. 请通过epochs输入epoch数量。 模型训练由多个epoch组成。
+    </p>
+    <br />
+    <p class="text-lg">2. 请通过learningrate输入初始学习率。</p>
+    强化学习算法会更新模型，初始学习率为learning rate。
+    <br />
+    <br />
+    <p class="text-lg">3. 请通过learning decay输入学习率变化量。</p>
+    在训练过程中，学习率会不停变化，每过一个epoch，学习率将会乘上learning decay
+    。
+    <br />
+    <br />
+    <p class="text-lg">
+      4. 请通过instances per batch输入每个batch中问题实例数。
+    </p>
+    模型训练由多个epoch组成，每个epoch由多个batch组成，每个batch的问题实例数为instance
+    per batch。
+    <br />
+    <br />
+    <p class="text-lg">
+      5. 请通过instances per epoch输入每个epoch中问题实例数。
+    </p>
+    模型训练由多个epoch组成，每个epoch由多个batch组成。每个epoch的问题实例数为instances
+    per epoch。batch数量即为instances per epoch/instances per batch
+    。batch数量应该为整数，所以instances per epoch应为instances per
+    batch的整数倍。
+    <br />
+    <br />
+    <p class="text-lg">
+      6. 请通过instance per validation输入验证集中问题实例数。
+    </p>
+    每训练一个epoch后，算法库会随机出一定数量的问题实例做验证，从而获得当前模型的表现情况以及尝试更新最优模型。
+    <br />
+    <br />
+    <p class="text-lg">7. 请通过seed输入随机种子。</p>
+    seed将成为算法库全局的随机种子。
+  </div>
+  <div *ngSwitchCase="4" class="pt-6 pl-3 pr-3 leading-7">
+    <p class="text-lg">1. 请通过output dir输入模型保存目录。</p>
+    <br />
+    <p class="text-lg">2. 请通过run name输入此次运行的名字。</p>
+    通过output dir和run name可以得到此次训练得到的所有模型。
+  </div>
+</div>

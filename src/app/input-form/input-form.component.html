@@ -1,0 +1,156 @@
+<div
+  [ngSwitch]="index"
+  class="h-full pt-4 pl-6 scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-rounded-xl scrollbar-thumb-gray-200 scrollbar-track-gray-50 hover:scrollbar-thumb-gray-300 overflow-y-scroll"
+>
+  <div *ngSwitchCase="0">
+    <form [formGroup]="problemForm">
+      <p class="text-xl pb-3 font-semibold pt-2">problem</p>
+      <p-dropdown
+        [options]="problems"
+        placeholder="Select a Problem"
+        optionLabel="name"
+        formControlName="problem"
+        [style]="{ height: '40px', width: '12rem' }"
+      ></p-dropdown>
+      <p class="text-xl pb-3 font-semibold pt-2">graph size</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="graph_size"
+        pInputText
+      />
+    </form>
+  </div>
+  <div *ngSwitchCase="1">
+    <form [formGroup]="modelForm">
+      <p class="text-xl pb-3 font-semibold pt-2">model</p>
+      <p-dropdown
+        [options]="models"
+        placeholder="Select a model"
+        optionLabel="name"
+        formControlName="model"
+        [style]="{ height: '40px', width: '12rem' }"
+      ></p-dropdown>
+      <p class="text-xl pb-3 font-semibold pt-2">embedding dim</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="embedding_dim"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">encode layers</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="encode_layers"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">heads</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="heads"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">hidden dim</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="hidden_dim"
+        pInputText
+        [style]="{ 'margin-bottom': '20px' }"
+      />
+    </form>
+  </div>
+  <div *ngSwitchCase="2">
+    <form [formGroup]="algorithmForm">
+      <p class="text-xl pb-3 font-semibold pt-2">algotithm</p>
+      <input
+        type="text"
+        class="p-inputtext-sm w-48"
+        formControlName="algorithm"
+        pInputText
+        readonly
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">baseline alpha</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="baseline_alpha"
+        pInputText
+      />
+    </form>
+  </div>
+  <div *ngSwitchCase="3">
+    <form [formGroup]="trainForm">
+      <p class="text-xl pb-3 font-semibold pt-2">epochs</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="epochs"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">learning rate</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="learning_rate"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">learning rate dacay</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="learning_rate_dacay"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">instances per batch</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="instances_per_batch"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">instances per epoch</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="instances_per_epoch"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">instance per validation</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="instance_per_validation"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">seed</p>
+      <input
+        type="number"
+        class="p-inputtext-sm w-48"
+        formControlName="seed"
+        pInputText
+        [style]="{ 'margin-bottom': '20px' }"
+      />
+    </form>
+  </div>
+  <div *ngSwitchCase="4">
+    <form [formGroup]="miscForm">
+      <p class="text-xl pb-3 font-semibold pt-2">output dir</p>
+      <input
+        type="text"
+        class="p-inputtext-sm w-48"
+        formControlName="output_dir"
+        pInputText
+      />
+      <p class="text-xl pb-3 font-semibold pt-2">run name</p>
+      <input
+        type="text"
+        class="p-inputtext-sm w-48"
+        formControlName="run_name"
+        pInputText
+      />
+    </form>
+  </div>
+</div>

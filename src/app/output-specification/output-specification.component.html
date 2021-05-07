@@ -1,0 +1,196 @@
+<div
+  class="grid grid-cols-5 h-full pt-1 pl-6 scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-rounded-xl scrollbar-thumb-gray-200 scrollbar-track-gray-50 hover:scrollbar-thumb-gray-300 overflow-y-scroll"
+>
+  <div class="col-span-1">
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">problem</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.problem"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">graph size</p>
+    <div class="pl-2">
+      <input
+        type="number"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.graph_size"
+        readonly
+      />
+    </div>
+  </div>
+  <div class="col-span-1">
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">model</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.model"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">embedding dim</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.embedding_dim"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">encode layers</p>
+    <div class="pl-2">
+      <input
+        type="number"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.n_encode_layers"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">heads</p>
+    <div class="pl-2">
+      <input
+        type="number"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.n_heads"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">hidden dim</p>
+    <div class="pl-2">
+      <input
+        type="number"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.hidden_dim"
+        readonly
+      />
+    </div>
+  </div>
+  <div class="col-span-1">
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">algotithm</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.baseline"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">baseline alpha</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.bl_alpha"
+        readonly
+      />
+    </div>
+  </div>
+  <div class="col-span-1">
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">epochs</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.n_epochs"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">learning rate</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.lr_model"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">learning rate dacay</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.lr_decay"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">instances per batch</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.batch_size"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">instances per epoch</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.epoch_size"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">
+      instance per validation
+    </p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.val_size"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">seed</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.seed"
+        readonly
+      />
+    </div>
+  </div>
+  <div class="col-span-1 pr-4">
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">output dir</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.output_dir"
+        readonly
+      />
+    </div>
+    <p class="text-base pb-1 font-semibold pt-2 pl-2">run name</p>
+    <div class="pl-2">
+      <input
+        type="text"
+        class="p-inputtext-sm w-full h-8 text-black"
+        pInputText
+        [(ngModel)]="FinishForm.run_name"
+        readonly
+      />
+    </div>
+  </div>
+</div>
