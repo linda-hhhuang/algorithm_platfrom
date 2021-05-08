@@ -1,9 +1,16 @@
-<<<<<<< HEAD
-# project
 =======
 # Project
+It is a project about algorithm, dependencies:
+>
+>Angular CLI: 11.2.11
+>
+>Node: 14.4.0
+>
+>tailwind 
+>>tailwind-scrollbar
+>
+>primeng
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
 
 ## Development server
 
