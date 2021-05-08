@@ -61,7 +61,6 @@ export class InputPageComponent implements OnInit {
     }
     else {
       this.showSuccess();
-      // this.payLoad = JSON.stringify(this.form.getRawValue());
       this.messagehandleservice.send_message(this.form.getRawValue());
       this.router.navigate(['/output']);
 
