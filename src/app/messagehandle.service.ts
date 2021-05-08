@@ -1,33 +1,32 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
   HttpParams,
 } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
+import { tap, switchMap, share, retry, takeUntil } from 'rxjs/operators';
+import { RecvType, SendType } from './messagehandle.entity';
 
 const url = '/api/server';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json;charset=UTF-8'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageHandleService {
 
-  private sendMessage = new BehaviorSubject<any>(null);
+  private sendMessage = new BehaviorSubject<SendType>(null);
   sendMessage$ = this.sendMessage.asObservable();
-  private receiveMessage = new BehaviorSubject<any>(null);
+  private receiveMessage = new BehaviorSubject<RecvType>(null);
   receiveMessage$ = this.receiveMessage.asObservable();
-  options: {
-    body?: any;
-    headers?: HttpHeaders | { [header: string]: string | string[] };
-    observe?: 'body';
-    params?: HttpParams | { [param: string]: string | string[] };
-    reportProgress?: boolean;
-    responseType?: 'json';
-    withCredentials?: boolean;
-  };
-  httpParams?: HttpParams = new HttpParams();
+  private stopPolling = new Subject();
+  startPolling$ = this.stopPolling.asObservable();
+  private counter = 0;
   constructor(
     private http: HttpClient
   ) { }
@@ -53,46 +52,29 @@ export class MessageHandleService {
       run_name: rawmessage.MiscForm.run_name,
       output_dir: rawmessage.MiscForm.output_dir
     });
-    this.http.post<any>('http://127.0.0.1:5000/server', JSON.stringify(this.sendMessage.value)).pipe(
-      tap({
-        next: (response) => {
-          this.receiveMessage.next(response);
-          console.log(response);
+    this.http.post<any>(url, JSON.stringify(this.sendMessage.value), httpOptions).subscribe();
+
+    this.receiveMessage$ = timer(1, 3000).pipe(
+      switchMap(() => this.http.get<any>(url, httpOptions)),
+      retry(),
+      share(),
+      takeUntil(this.stopPolling)
+    );
+
+    this.receiveMessage$.subscribe(
+      (message: RecvType) => {
+        if (!(message.epoch < message.all_epochs)) {
+          this.counter++;
+          if (this.counter === 3) {
+            this.stopPolling.next();
+          }
         }
-      })
-    ).subscribe();
-    // const response =
-    // {
-    //   all_epochs: 3,
-    //   all_time: '00:00:22',
-    //   avg_cost: 1.5673738718032837,
-    //   batch_arr: [
-    //     0,
-    //     1,
-    //     2
-    //   ],
-    //   cost_arr: [
-    //     1.5673738718032837,
-    //     1.5673738718032837,
-    //     1.5673738718032837
-    //   ],
-    //   epoch: 3,
-    //   epoch_arr: [
-    //     0,
-    //     1,
-    //     2
-    //   ],
-    //   loss_arr: [
-    //     0.06434205174446106,
-    //     -2.284599398549858e-09,
-    //     7.76639375033028e-09
-    //   ],
-    //   lr: 0.0001,
-    //   run_name: 'tsp_20_20210506T235557',
-    //   std_cost: 0.004739717114716768
-    // };
-    // this.receiveMessage.next(response);
+      }
+    );
   }
 
+  ngOnDestroy() {
+    this.stopPolling.next();
+  }
 
 }
