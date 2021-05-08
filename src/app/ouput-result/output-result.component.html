@@ -2,6 +2,12 @@
   ​ Program is running epoch {{ receiveMessage.epoch }}/{{
     receiveMessage.all_epochs
   }}. The learning rate is {{ receiveMessage.lr }}.
+  <br />
+  The time program has run: {{ receiveMessage.all_time }}.
+  <br />
+  Model's average cost : {{ receiveMessage.avg_cost }}, standard deviation：{{
+    receiveMessage.std_cost
+  }}.
 </div>
 <div
   *ngIf="showSuccess"
